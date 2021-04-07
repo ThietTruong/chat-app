@@ -7,22 +7,20 @@ import chatRooms from "../../data/ChatRooms";
 import moment from "moment";
 
 function ChatListItem({ chatRoom }) {
-  // return (
-  //   <View>
-  //     <Text>{chatRoom.lastMessage.content}</Text>
-  //   </View>
-  // );
+  const navigation = useNavigation();
+  const user = chatRoom.users[1];
+  const onClick = () => {
+    navigation.navigate("ChatRoom", { id: chatRoom.id, name: user.name });
+  };
+
   return (
-    <TouchableWithoutFeedback>
+    <TouchableWithoutFeedback onPress={onClick}>
       <View style={styles.container}>
         <View style={styles.lefContainer}>
-          <Image
-            source={{ uri: chatRoom.users.imageUri }}
-            style={styles.avatar}
-          />
+          <Image source={{ uri: user.imageUri }} style={styles.avatar} />
 
           <View style={styles.midContainer}>
-            <Text style={styles.username}>{chatRoom.users.name}</Text>
+            <Text style={styles.username}>{user.name}</Text>
             <Text numberOfLines={2} style={styles.lastMessage}>
               {chatRoom.lastMessage.content}
             </Text>

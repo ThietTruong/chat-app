@@ -19,6 +19,7 @@ import { RootStackParamList } from "../types";
 import MainTabNavigator from "./MainTabNavigator";
 import LinkingConfiguration from "./LinkingConfiguration";
 import Colors from "../constants/Colors";
+import ChatRoomScreen from "../screens/ChatRoomScreen";
 // import ContactsScreen from "../screens/ContactsScreen";
 
 // If you are not familiar with React Navigation, we recommend going through the
@@ -82,11 +83,37 @@ function RootNavigator() {
           ),
         }}
       />
-      <Stack.Screen
+      {/* <Stack.Screen
         name="ChatRoom"
         component={MainTabNavigator}
         options={({ route }) => ({
-          title: "chat rom",
+          title: "ChatRoom",
+          headerRight: () => (
+            <View
+              style={{
+                flexDirection: "row",
+                width: 100,
+                justifyContent: "space-between",
+                marginRight: 10,
+              }}
+            >
+              <FontAwesome5 name="video" size={22} color={"white"} />
+              <MaterialIcons name="call" size={22} color={"white"} />
+              <MaterialCommunityIcons
+                name="dots-vertical"
+                size={22}
+                color={"white"}
+              />
+            </View>
+          ),
+        })}
+      /> */}
+      <Stack.Screen name="Contacts" component={MainTabNavigator} />
+      <Stack.Screen
+        name="ChatRoom"
+        component={ChatRoomScreen}
+        options={({ route }) => ({
+          title: route.params.name,
           headerRight: () => (
             <View
               style={{
@@ -107,7 +134,6 @@ function RootNavigator() {
           ),
         })}
       />
-      <Stack.Screen name="Contacts" component={MainTabNavigator} />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}
